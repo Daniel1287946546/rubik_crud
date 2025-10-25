@@ -1,47 +1,67 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
+from typing import List
+
 from database.db import get_session
-from models.competitor_record import CompetitorRecord, CompetitorRecordBase
+from models.competitor_record import CompetitorRecord, CompetitorRecordCreate
 
-router = APIRouter(
-    prefix="/records",
-    tags=["Records"]
-)
+router = APIRouter(prefix="/records", tags=["Competitor Records"])
 
-# ✅ Crear un nuevo récord
+
+# 🟢 Crear un nuevo record
 @router.post("/", response_model=CompetitorRecord)
-def create_record(record: CompetitorRecordBase, session: Session = Depends(get_session)):
-    db_record = CompetitorRecord.from_orm(record)
-    session.add(db_record)
+def create_record(record: CompetitorRecordCreate, session: Session = Depends(get_session)):
+    new_record = CompetitorRecord.from_orm(record)
+    session.add(new_record)
     session.commit()
-    session.refresh(db_record)
-    return db_record
+    session.refresh(new_record)
+    return new_record
 
 
-# ✅ Listar todos los récords
-@router.get("/", response_model=list[CompetitorRecord])
-def list_records(session: Session = Depends(get_session)):
+# 🟢 Obtener todos los records
+@router.get("/", response_model=List[CompetitorRecord])
+def get_all_records(session: Session = Depends(get_session)):
     records = session.exec(select(CompetitorRecord)).all()
     return records
 
 
-# ✅ Obtener récords por competidor
-@router.get("/competitor/{competitor_id}", response_model=list[CompetitorRecord])
-def get_records_by_competitor(competitor_id: int, session: Session = Depends(get_session)):
-    records = session.exec(
-        select(CompetitorRecord).where(CompetitorRecord.competitor_id == competitor_id)
-    ).all()
-    if not records:
-        raise HTTPException(status_code=404, detail="No records found for this competitor")
-    return records
+# 🟢 Obtener record por ID
+@router.get("/{record_id}", response_model=CompetitorRecord)
+def get_record_by_id(record_id: int, session: Session = Depends(get_session)):
+    record = session.get(CompetitorRecord, record_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Record no encontrado")
+    return record
 
 
-# ✅ Obtener récords por torneo
-@router.get("/tournament/{tournament_id}", response_model=list[CompetitorRecord])
-def get_records_by_tournament(tournament_id: int, session: Session = Depends(get_session)):
-    records = session.exec(
-        select(CompetitorRecord).where(CompetitorRecord.tournament_id == tournament_id)
-    ).all()
-    if not records:
-        raise HTTPException(status_code=404, detail="No records found for this tournament")
-    return records
+# 🟡 Actualizar record
+@router.put("/{record_id}", response_model=CompetitorRecord)
+def update_record(record_id: int, updated_record: CompetitorRecordCreate, session: Session = Depends(get_session)):
+    record = session.get(CompetitorRecord, record_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Record no encontrado")
+
+    record.event_type = updated_record.event_type
+    record.record_time = updated_record.record_time
+    record.record_date = updated_record.record_date
+    record.competitor_id = updated_record.competitor_id
+    record.tournament_id = updated_record.tournament_id
+
+    session.add(record)
+    session.commit()
+    session.refresh(record)
+    return record
+
+
+# 🔴 Eliminar record
+@router.delete("/{record_id}")
+def delete_record(record_id: int, session: Session = Depends(get_session)):
+    record = session.get(CompetitorRecord, record_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Record no encontrado")
+
+    session.delete(record)
+    session.commit()
+    return {"ok": True, "message": "Record fue eliminado correctamente"}
+
+
