@@ -5,6 +5,7 @@ from sqlalchemy.orm import Mapped
 if TYPE_CHECKING:
     from .cube import Cube
     from .competitor import Competitor
+    from .competitor_record import CompetitorRecord  # ✅ nuevo modelo intermedio
 
 
 class Tournament(SQLModel, table=True):
@@ -13,11 +14,15 @@ class Tournament(SQLModel, table=True):
     date: str
     location: str
 
-    # Relación 1:N con cubos
+    # ✅ Relación 1:N con cubos
     cubes: Mapped[List["Cube"]] = Relationship(back_populates="tournament")
 
-    # Relación 1:N con competidores
+    # ✅ Relación 1:N con competidores
     competitors: Mapped[List["Competitor"]] = Relationship(back_populates="tournament")
+
+    # ✅ Relación N:N con CompetitorRecord (competencias registradas)
+    records: Mapped[List["CompetitorRecord"]] = Relationship(back_populates="tournament")
+
 
 
 
