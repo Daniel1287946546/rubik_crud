@@ -62,7 +62,7 @@ def delete_cube(cube_id: int):
             raise HTTPException(status_code=404, detail="Cubo no encontrado")
         session.delete(cube)
         session.commit()
-        return {"message": "Cubo eliminado correctamente ✅"}
+        return {"message": "Cubo eliminado "}
 
 
 

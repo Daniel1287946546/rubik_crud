@@ -8,7 +8,7 @@ from models.tournament import Tournament
 class CompetitorRecordBase(SQLModel):
     event_type: str
     record_time: float
-    record_date: date  # ✅ Permite escribir "2025-10-30" manualmente
+    record_date: date   
 
 
 class CompetitorRecordCreate(CompetitorRecordBase):

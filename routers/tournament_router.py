@@ -8,13 +8,17 @@ from models.tournament import Tournament
 router = APIRouter(prefix="/tournaments", tags=["Tournaments"])
 
 
+# 🟢 CREATE
 @router.post("/", response_model=Tournament)
 def create_tournament(tournament: Tournament):
+    
     if isinstance(tournament.date, str):
         try:
             tournament.date = datetime.strptime(tournament.date, "%Y-%m-%d").date()
         except ValueError:
             raise HTTPException(status_code=400, detail="Formato de fecha inválido. Usa YYYY-MM-DD")
+
+    tournament.is_active = True  
 
     with Session(engine) as session:
         session.add(tournament)
@@ -23,10 +27,13 @@ def create_tournament(tournament: Tournament):
         return tournament
 
 
+
 @router.get("/", response_model=List[Tournament])
 def get_all_tournaments():
     with Session(engine) as session:
-        tournaments = session.exec(select(Tournament)).all()
+        tournaments = session.exec(
+            select(Tournament).where(Tournament.is_active == True)
+        ).all()
         return tournaments
 
 
@@ -37,6 +44,8 @@ def get_tournament(tournament_id: int):
         if not tournament:
             raise HTTPException(status_code=404, detail="Torneo no encontrado")
         return tournament
+
+
 
 @router.put("/{tournament_id}", response_model=Tournament)
 def update_tournament(tournament_id: int, data: Tournament):
@@ -66,8 +75,20 @@ def delete_tournament(tournament_id: int):
         tournament = session.get(Tournament, tournament_id)
         if not tournament:
             raise HTTPException(status_code=404, detail="Torneo no encontrado")
-        session.delete(tournament)
+
+        tournament.is_active = False
+        session.add(tournament)
         session.commit()
-        return {"message": "Torneo eliminado correctamente ✅"}
+        session.refresh(tournament)
+        return {"message": "Torneo marcado como inactivo"}
+
+
+@router.get("/inactivos/", response_model=List[Tournament])
+def get_inactive_tournaments():
+    with Session(engine) as session:
+        tournaments = session.exec(
+            select(Tournament).where(Tournament.is_active == False)
+        ).all()
+        return tournaments
 
 
