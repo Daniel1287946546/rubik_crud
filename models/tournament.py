@@ -1,9 +1,10 @@
-from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List, TYPE_CHECKING
 from sqlalchemy.orm import Mapped
 
 if TYPE_CHECKING:
     from .cube import Cube
+    from .competitor import Competitor
 
 
 class Tournament(SQLModel, table=True):
@@ -12,8 +13,14 @@ class Tournament(SQLModel, table=True):
     date: str
     location: str
 
-
+    # Relación 1:N con cubos
     cubes: Mapped[List["Cube"]] = Relationship(back_populates="tournament")
+
+    # Relación 1:N con competidores
+    competitors: Mapped[List["Competitor"]] = Relationship(back_populates="tournament")
+
+
+
 
 
 
