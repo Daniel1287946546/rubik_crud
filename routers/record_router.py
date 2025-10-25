@@ -8,7 +8,7 @@ from models.competitor_record import CompetitorRecord, CompetitorRecordCreate
 router = APIRouter(prefix="/records", tags=["Competitor Records"])
 
 
-# 🟢 Crear un nuevo record
+
 @router.post("/", response_model=CompetitorRecord)
 def create_record(record: CompetitorRecordCreate, session: Session = Depends(get_session)):
     new_record = CompetitorRecord.from_orm(record)
@@ -18,14 +18,14 @@ def create_record(record: CompetitorRecordCreate, session: Session = Depends(get
     return new_record
 
 
-# 🟢 Obtener todos los records
+
 @router.get("/", response_model=List[CompetitorRecord])
 def get_all_records(session: Session = Depends(get_session)):
     records = session.exec(select(CompetitorRecord)).all()
     return records
 
 
-# 🟢 Obtener record por ID
+
 @router.get("/{record_id}", response_model=CompetitorRecord)
 def get_record_by_id(record_id: int, session: Session = Depends(get_session)):
     record = session.get(CompetitorRecord, record_id)
@@ -34,7 +34,6 @@ def get_record_by_id(record_id: int, session: Session = Depends(get_session)):
     return record
 
 
-# 🟡 Actualizar record
 @router.put("/{record_id}", response_model=CompetitorRecord)
 def update_record(record_id: int, updated_record: CompetitorRecordCreate, session: Session = Depends(get_session)):
     record = session.get(CompetitorRecord, record_id)
@@ -53,7 +52,7 @@ def update_record(record_id: int, updated_record: CompetitorRecordCreate, sessio
     return record
 
 
-# 🔴 Eliminar record
+
 @router.delete("/{record_id}")
 def delete_record(record_id: int, session: Session = Depends(get_session)):
     record = session.get(CompetitorRecord, record_id)
@@ -62,6 +61,6 @@ def delete_record(record_id: int, session: Session = Depends(get_session)):
 
     session.delete(record)
     session.commit()
-    return {"ok": True, "message": "Record fue eliminado correctamente"}
+    return {"ok": True, "message": "Record fue eliminado "}
 
 
