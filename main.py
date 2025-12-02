@@ -7,9 +7,6 @@ from routers.competitor_router import router as competitor_router
 from routers.record_router import router as record_router
 
 
-# -----------------------------
-# Lifespan: crea las tablas al iniciar
-# -----------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("⏳ Creando tablas si no existen...")
@@ -19,9 +16,6 @@ async def lifespan(app: FastAPI):
     print("👋 Finalizando aplicación...")
 
 
-# -----------------------------
-# Configuración principal de la app
-# -----------------------------
 app = FastAPI(
     title="CRUD Cubo de Rubik 🧩",
     description=(
@@ -33,18 +27,13 @@ app = FastAPI(
 )
 
 
-# -----------------------------
-# Routers (módulos del sistema)
-# -----------------------------
 app.include_router(cube_router)
 app.include_router(tournament_router)
 app.include_router(competitor_router)
 app.include_router(record_router)
 
 
-# -----------------------------
-# Endpoint principal
-# -----------------------------
+
 @app.get("/")
 def home():
     return {
