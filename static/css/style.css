@@ -1,15 +1,199 @@
+/* =======================
+ 🌈 GLOBAL RESET
+======================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Poppins, sans-serif;
+}
+
+/* =======================
+ 🌌 APP BACKGROUND
+======================= */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #0b0d18, #12172a);
+    color: #e2e2e2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-h1 {
-    color: #333;
+/* =======================
+ 🧭 NAVBAR
+======================= */
+header {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    padding: 14px 40px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #e2e2e2;
+    text-decoration: none;
+    font-size: 1.06rem;
+    font-weight: 500;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00eaff;
+    text-shadow: 0 0 8px #00eaff;
+}
+
+/* =======================
+ 📦 MAIN CONTAINER
+======================= */
+main {
+    width: 80%;
+    margin: auto;
+    padding: 30px 0;
+}
+
+/* =======================
+ 🎯 TITLES
+======================= */
+h1, h2 {
+    margin-bottom: 18px;
+    color: #fafafa;
+    font-weight: 600;
+}
+
+/* =======================
+ 📝 FORMS
+======================= */
+form {
+    background: rgba(255,255,255,0.08);
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+label {
+    font-weight: 500;
+    color: #d9d9d9;
+}
+
+input, select {
+    padding: 8px 12px;
+    background: rgba(20,20,20,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #eee;
+    outline: none;
+    transition: .2s;
+}
+
+input:focus, select:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 6px #00eaff;
+}
+
+/* =======================
+ 🚀 BUTTONS
+======================= */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px;
+    background: linear-gradient(90deg, #00eaff, #3a86ff);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #060a15;
     cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #3a86ff, #00eaff);
+    transform: translateY(-2px);
+}
+
+/* =======================
+ 📋 TABLES
+======================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: rgba(255,255,255,0.14);
+    padding: 10px;
+    color: #fff;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+tr:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+/* =======================
+ 🏆 COMPETITOR CARDS
+======================= */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    transition: .3s;
+    box-shadow: 0 0 22px rgba(0,0,0,.4);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px rgba(0,255,255,.4);
+}
+
+.card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 3px solid rgba(255,255,255,0.4);
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+/* =======================
+ 📱 RESPONSIVE
+======================= */
+@media(max-width: 720px) {
+    main {
+        width: 92%;
+    }
+    nav {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 }

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if edit_mode %}Editar Cubo{% else %}Crear Cubo{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    {% if edit_mode %}
+        ✏️ Editar Cubo
+    {% else %}
+        ➕ Crear Nuevo Cubo
+    {% endif %}
+</h1>
+
+<form method="post" action="{% if edit_mode %}/cubes/{{ cube.id }}/edit{% else %}/cubes/new{% endif %}">
+
+    <label>Marca:</label>
+    <input type="text" name="brand" required value="{{ cube.brand if cube else '' }}">
+
+    <label>Mecanismo:</label>
+    <input type="text" name="mechanism" required value="{{ cube.mechanism if cube else '' }}">
+
+    <label>Piezas:</label>
+    <input type="number" name="pieces" min="1" required value="{{ cube.pieces if cube else '' }}">
+
+    <label>Dificultad:</label>
+    <input type="text" name="difficulty" required value="{{ cube.difficulty if cube else '' }}">
+
+    <label>¿Apto para Competición?</label>
+    <input type="checkbox" name="is_competition"
+        {% if cube and cube.is_competition %}checked{% endif %}>
+
+    <label>World record (segundos):</label>
+    <input type="number" step="0.01" min="0" name="world_record" required
+        value="{{ cube.world_record if cube else '' }}">
+
+    <label>Torneo Asociado:</label>
+    {% if tournaments %}
+        <select name="tournament_id">
+            <option value="">-- Ninguno --</option>
+
+            {% for t in tournaments %}
+                <option value="{{ t.id }}"
+                    {% if cube and cube.tournament_id == t.id %}selected{% endif %}>
+                    {{ t.name }}
+                </option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <p>No hay torneos registrados.</p>
+    {% endif %}
+
+    <br><br>
+
+    <button type="submit">
+        {% if edit_mode %}
+            💾 Guardar Cambios
+        {% else %}
+            ➕ Crear Cubo
+        {% endif %}
+    </button>
+</form>
+
+{% endblock %}

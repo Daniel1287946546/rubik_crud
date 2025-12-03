@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Competidor{% endblock %}
+
+{% block content %}
+<h1>Editar Competidor</h1>
+
+<form method="post" action="/competitors/{{ competitor.id }}/edit">
+
+    <label>Nombre:</label>
+    <input type="text" name="name" value="{{ competitor.name }}" required>
+
+    <label>País:</label>
+    <input type="text" name="country" value="{{ competitor.country }}" required>
+
+    <label>Tiempo promedio:</label>
+    <input type="number" step="0.01" name="average_time" value="{{ competitor.average_time }}" required>
+
+    <label>Cubo:</label>
+    <select name="cube_id">
+        <option value="">-- Ninguno --</option>
+        {% for cube in cubes %}
+            <option value="{{ cube.id }}" {% if competitor.cube_id == cube.id %}selected{% endif %}>
+                {{ cube.brand }} ({{ cube.pieces }} piezas)
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Torneo:</label>
+    <select name="tournament_id">
+        <option value="">-- Ninguno --</option>
+        {% for t in tournaments %}
+            <option value="{{ t.id }}" {% if competitor.tournament_id == t.id %}selected{% endif %}>
+                {{ t.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+    <button type="submit">💾 Actualizar</button>
+</form>
+
+{% endblock %}

@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Rubik CRUD</title>
-    <!-- Enlaza el CSS desde la carpeta static/css -->
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>¡Bienvenido a Rubik CRUD!</h1>
-    <p>Servidor FastAPI funcionando correctamente.</p>
+{% extends "base.html" %}
 
-    <!-- Botón de ejemplo -->
-    <button id="demoButton">Haz clic</button>
+{% block title %}Inicio{% endblock %}
 
-    <!-- Enlaza el JS desde la carpeta static/js -->
-    <script src="/static/js/script.js"></script>
-</body>
-</html>
+{% block content %}
+<h1>Bienvenido a Rubik CRUD</h1>
+<p>Servidor funcionando correctamente.</p>
+
+<ul>
+    <li><a href="/cubes">📦 Gestión de Cubos</a></li>
+    <li><a href="/competitors">👤 Gestión de Competidores</a></li>
+    <li><a href="/tournaments">🏆 Gestión de Torneos</a></li>
+    <li><a href="/records">⏱️ Gestión de Records</a></li>
+</ul>
+
+{% endblock %}

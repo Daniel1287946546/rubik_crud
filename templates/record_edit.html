@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Record{% endblock %}
+
+{% block content %}
+<h1>✏️ Editar Record</h1>
+
+<form method="post" action="/records/{{ record.id }}/edit">
+
+    <label>Competidor:</label>
+    <select name="competitor_id" required>
+        {% for c in competitors %}
+        <option value="{{ c.id }}" {% if c.id == record.competitor_id %}selected{% endif %}>
+            {{ c.name }} ({{ c.country }})
+        </option>
+        {% endfor %}
+    </select>
+
+    <label>Cubo:</label>
+    <select name="cube_id" required>
+        {% for cube in cubes %}
+        <option value="{{ cube.id }}" {% if cube.id == record.cube_id %}selected{% endif %}>
+            {{ cube.brand }} - {{ cube.pieces }} piezas
+        </option>
+        {% endfor %}
+    </select>
+
+    <label>Tiempo (segundos):</label>
+    <input type="number" name="solve_time" step="0.01" min="0" value="{{ record.solve_time }}" required>
+
+    <br><br>
+    <button type="submit">💾 Actualizar</button>
+
+</form>
+
+{% endblock %}

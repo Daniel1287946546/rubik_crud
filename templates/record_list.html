@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Records de Competidores{% endblock %}
+
+{% block content %}
+<h1>🏁 Records</h1>
+
+<a href="/records/new">➕ Registrar nuevo record</a>
+<br><br>
+
+{% if records %}
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Competidor</th>
+        <th>Cubo</th>
+        <th>Tiempo (seg)</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for r in records %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.competitor.name if r.competitor else 'N/A' }}</td>
+            <td>{{ r.cube.brand if r.cube else 'N/A' }}</td>
+            <td>{{ r.solve_time }}</td>
+            <td>
+                <a href="/records/{{ r.id }}/edit">✏️ Editar</a> |
+                <form method="post" action="/records/{{ r.id }}/delete" style="display:inline;">
+                    <button type="submit" onclick="return confirm('¿Eliminar este record?')">🗑️</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>No hay records registrados.</p>
+{% endif %}
+
+{% endblock %}

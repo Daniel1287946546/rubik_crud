@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Torneos{% endblock %}
+
+{% block content %}
+<h1>🏆 Lista de Torneos</h1>
+
+<a href="/tournaments/new">➕ Crear torneo</a>
+
+{% if tournaments %}
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Ubicación</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for t in tournaments %}
+        <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.name }}</td>
+            <td>{{ t.location }}</td>
+            <td>{{ t.date }}</td>
+            <td>
+                <form method="post" action="/tournaments/{{ t.id }}/delete" style="display:inline;">
+                    <button type="submit" style="color:red;">🗑️ Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay torneos registrados aún.</p>
+{% endif %}
+{% endblock %}

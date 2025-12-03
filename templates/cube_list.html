@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Listado Cubos{% endblock %}
+
+{% block content %}
+<h1>Listado de Cubos Rubik</h1>
+
+<a href="/cubes/new">➕ Crear nuevo cubo</a>
+<br><br>
+
+{% if cubes %}
+<table border="1" cellspacing="0" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Mecanismo</th>
+        <th>Piezas</th>
+        <th>Dificultad</th>
+        <th>Competición?</th>
+        <th>World Record</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for cube in cubes %}
+        <tr>
+            <td>{{ cube.id }}</td>
+            <td>{{ cube.brand }}</td>
+            <td>{{ cube.mechanism }}</td>
+            <td>{{ cube.pieces }}</td>
+            <td>{{ cube.difficulty }}</td>
+            <td>{{ "Sí" if cube.is_competition else "No" }}</td>
+            <td>{{ cube.world_record }}</td>
+
+            <td style="display:flex; gap:8px">
+                <a href="/cubes/{{ cube.id }}/edit">✏️ Editar</a>
+
+                <form method="post" action="/cubes/{{ cube.id }}/delete" onsubmit="return confirm('¿Eliminar cubo?')">
+                    <button type="submit">🗑️ Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay cubos registrados aún.</p>
+{% endif %}
+{% endblock %}
+

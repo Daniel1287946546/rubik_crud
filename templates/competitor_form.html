@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Competidor{% endblock %}
+
+{% block content %}
+<h1>Crear Competidor</h1>
+
+<form method="post" action="/competitors/new" enctype="multipart/form-data">
+
+    <label>Nombre:</label>
+    <input type="text" name="name" required>
+
+    <label>País:</label>
+    <input type="text" name="country" required>
+
+    <label>Tiempo promedio (seg):</label>
+    <input type="number" step="0.01" name="average_time" required>
+
+    <label>Foto del Competidor (opcional):</label>
+    <input type="file" name="image">
+
+    <label>Cubo:</label>
+    {% if cubes %}
+        <select name="cube_id">
+            <option selected value="">-- Ninguno --</option>
+            {% for cube in cubes %}
+                <option value="{{ cube.id }}">{{ cube.brand }} ({{ cube.pieces }} piezas)</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <p>No hay cubos registrados</p>
+    {% endif %}
+
+    <label>Torneo:</label>
+    {% if tournaments %}
+        <select name="tournament_id">
+            <option selected value="">-- Ninguno --</option>
+            {% for t in tournaments %}
+                <option value="{{ t.id }}">{{ t.name }}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <p>No hay torneos registrados</p>
+    {% endif %}
+
+    <br><br>
+    <button type="submit">Guardar Competidor</button>
+</form>
+
+{% endblock %}
+
+
+

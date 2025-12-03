@@ -1,7 +1,6 @@
-from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List, TYPE_CHECKING
+from sqlmodel import SQLModel, Field, Relationship
 from datetime import date
-from sqlalchemy.orm import Mapped
 
 if TYPE_CHECKING:
     from .cube import Cube
@@ -9,32 +8,29 @@ if TYPE_CHECKING:
     from .competitor_record import CompetitorRecord
 
 
-# === MODELO PRINCIPAL ===
-class Tournament(SQLModel, table=True):
+class TournamentBase(SQLModel):
+    name: str
+    location: str
+    date: date
+    is_active: bool = True
+
+
+class Tournament(TournamentBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    date: date
-    location: str
-    is_active: bool = Field(default=True)
 
-    cubes: Mapped[List["Cube"]] = Relationship(back_populates="tournament")
-    competitors: Mapped[List["Competitor"]] = Relationship(back_populates="tournament")
-    records: Mapped[List["CompetitorRecord"]] = Relationship(back_populates="tournament")
+    cubes: List["Cube"] = Relationship(back_populates="tournament")
+    competitors: List["Competitor"] = Relationship(back_populates="tournament")
+    records: List["CompetitorRecord"] = Relationship(back_populates="tournament")
 
 
-# === MODELO PARA CREACIÓN (NO incluye id) ===
-class TournamentCreate(SQLModel):
-    name: str
-    date: date
-    location: str
-    is_active: Optional[bool] = True
+class TournamentCreate(TournamentBase):
+    pass
 
 
-# === MODELO PARA ACTUALIZACIÓN PARCIAL ===
 class TournamentUpdate(SQLModel):
     name: Optional[str] = None
-    date: Optional[date] = None
     location: Optional[str] = None
+    date: Optional[date] = None
     is_active: Optional[bool] = None
 
 

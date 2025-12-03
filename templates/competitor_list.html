@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Competidores{% endblock %}
+
+{% block content %}
+<h1>Listado de Competidores</h1>
+
+<a href="/competitors/new">➕ Crear competidor</a>
+<br><br>
+
+{% if competitors %}
+<table border="1" cellspacing="0" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>País</th>
+        <th>Tiempo promedio</th>
+        <th>Cubo</th>
+        <th>Torneo</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for c in competitors %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.country }}</td>
+            <td>{{ c.average_time }}</td>
+            <td>{{ c.cube.brand if c.cube else '—' }}</td>
+            <td>{{ c.tournament.name if c.tournament else '—' }}</td>
+
+            <td style="display:flex; gap:8px">
+
+                <a href="/competitors/{{ c.id }}/edit">✏️ Editar</a>
+
+                <form method="post" action="/competitors/{{ c.id }}/delete"
+                      onsubmit="return confirm('¿Eliminar competidor?')">
+                    <button type="submit">🗑️ Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>No hay competidores registrados aún.</p>
+{% endif %}
+
+{% endblock %}
+

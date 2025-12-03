@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Torneo{% endblock %}
+
+{% block content %}
+<h1>✏️ Editar Torneo</h1>
+
+<form method="post" action="/tournaments/{{ tournament.id }}/edit">
+
+    <label>Nombre:</label>
+    <input type="text" name="name" value="{{ tournament.name }}" required>
+
+    <label>Ubicación:</label>
+    <input type="text" name="location" value="{{ tournament.location }}" required>
+
+    <label>Fecha:</label>
+    <input type="date" name="date" value="{{ tournament.date }}" required>
+
+    <br><br>
+    <button type="submit">💾 Actualizar</button>
+</form>
+
+{% endblock %}

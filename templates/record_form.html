@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Record{% endblock %}
+
+{% block content %}
+<h1>Registrar Nuevo Record</h1>
+
+<form method="post" action="/records/new">
+
+    <label>Competidor:</label>
+    <select name="competitor_id" required>
+        {% for c in competitors %}
+            <option value="{{ c.id }}">{{ c.name }} ({{ c.country }})</option>
+        {% endfor %}
+    </select>
+
+    <label>Cubo:</label>
+    <select name="cube_id" required>
+        {% for cube in cubes %}
+            <option value="{{ cube.id }}">{{ cube.brand }} - {{ cube.pieces }} piezas</option>
+        {% endfor %}
+    </select>
+
+    <label>Tipo de evento:</label>
+    <select name="event_type" required>
+        <option value="single">Single</option>
+        <option value="average">Average</option>
+    </select>
+
+    <label>Tiempo (segundos):</label>
+    <input type="number" name="record_time" step="0.01" min="0" required>
+
+    <label>Torneo (opcional):</label>
+    <select name="tournament_id">
+        <option value="">-- Ninguno --</option>
+        {% for t in tournaments %}
+            <option value="{{ t.id }}">{{ t.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+    <button type="submit">Guardar Record</button>
+</form>
+
+{% endblock %}

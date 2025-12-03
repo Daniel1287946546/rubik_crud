@@ -5,6 +5,7 @@ from sqlalchemy.orm import Mapped
 if TYPE_CHECKING:
     from .tournament import Tournament
     from .competitor import Competitor
+    from .competitor_record import CompetitorRecord
 
 
 class CubeBase(SQLModel):
@@ -24,6 +25,9 @@ class Cube(CubeBase, table=True):
     tournament: Optional["Tournament"] = Relationship(back_populates="cubes")
     competitors: Mapped[List["Competitor"]] = Relationship(back_populates="cube")
 
+    # 🔥 ESTA LÍNEA ES OBLIGATORIA
+    records: Mapped[List["CompetitorRecord"]] = Relationship(back_populates="cube")
+
 
 class CubeCreate(CubeBase):
     tournament_id: Optional[int] = None
@@ -31,6 +35,7 @@ class CubeCreate(CubeBase):
 
 class CubeUpdate(CubeBase):
     tournament_id: Optional[int] = None
+
 
 
 
