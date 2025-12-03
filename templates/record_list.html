@@ -1,15 +1,26 @@
 {% extends "base.html" %}
 
-{% block title %}Records de Competidores{% endblock %}
+{% block title %}Records{% endblock %}
 
 {% block content %}
-<h1>🏁 Records</h1>
 
-<a href="/records/new">➕ Registrar nuevo record</a>
-<br><br>
+<div class="page-header">
+
+    <div class="page-left">
+        <!-- Imagen redonda para Records -->
+        <img src="https://i.pinimg.com/736x/fe/5a/f0/fe5af04cf15a3ea2f9a19321721cb8f2.jpg"
+             alt="records"
+             class="side-icon records">
+
+        <h1 class="page-title">Records</h1>
+    </div>
+
+    <a href="/records/new" class="btn-box-create">➕ Registrar nuevo record</a>
+
+</div>
 
 {% if records %}
-<table border="1">
+<table class="table-rubik">
     <thead>
     <tr>
         <th>ID</th>
@@ -19,6 +30,7 @@
         <th>Acciones</th>
     </tr>
     </thead>
+
     <tbody>
     {% for r in records %}
         <tr>
@@ -26,10 +38,13 @@
             <td>{{ r.competitor.name if r.competitor else 'N/A' }}</td>
             <td>{{ r.cube.brand if r.cube else 'N/A' }}</td>
             <td>{{ r.solve_time }}</td>
-            <td>
-                <a href="/records/{{ r.id }}/edit">✏️ Editar</a> |
-                <form method="post" action="/records/{{ r.id }}/delete" style="display:inline;">
-                    <button type="submit" onclick="return confirm('¿Eliminar este record?')">🗑️</button>
+
+            <td class="actions">
+                <a href="/records/{{ r.id }}/edit" class="btn-edit">✏️ Editar</a>
+
+                <form method="post" action="/records/{{ r.id }}/delete"
+                      onsubmit="return confirm('¿Eliminar este record?')">
+                    <button type="submit" class="btn-delete">🗑️ Eliminar</button>
                 </form>
             </td>
         </tr>
@@ -38,7 +53,7 @@
 </table>
 
 {% else %}
-<p>No hay records registrados.</p>
+<p class="empty-msg">No hay records registrados.</p>
 {% endif %}
 
 {% endblock %}

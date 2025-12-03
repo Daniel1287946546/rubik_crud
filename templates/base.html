@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Rubik CRUD{% endblock %}</title>
+
+    <!-- CSS principal -->
     <link rel="stylesheet" href="/static/css/style.css">
 
+    <!-- Meta para responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
 <header>
-    <nav>
+    <nav class="nav-container">
         <a href="/">🏠 Inicio</a>
         <a href="/cubes">🧊 Cubos</a>
         <a href="/competitors">👤 Competidores</a>
@@ -22,10 +27,9 @@
     {% block content %}{% endblock %}
 </main>
 
-<footer>
-    <p>Proyecto Integrador — Rubik CRUD — FastAPI + SQLModel</p>
+<footer class="footer">
+    <p>Rubik CRUD — Proyecto Integrador — FastAPI + SQLModel</p>
 </footer>
 
-<script src="/static/script.js"></script>
 </body>
 </html>

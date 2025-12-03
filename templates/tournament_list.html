@@ -3,39 +3,59 @@
 {% block title %}Torneos{% endblock %}
 
 {% block content %}
-<h1>🏆 Lista de Torneos</h1>
 
-<a href="/tournaments/new">➕ Crear torneo</a>
+<!-- HEADER -->
+<div class="page-header">
 
+    <div class="page-left">
+        <!-- ICONO PNG CIRCULAR -->
+        <img class="side-icon tournaments"
+             src="https://i.pinimg.com/736x/05/b9/e4/05b9e43b61a8fd186cea354f2454a1a7.jpg"
+             alt="torneo icon">
+
+        <h1 class="page-title">🏆 Lista de Torneos</h1>
+    </div>
+
+    <a href="/tournaments/new" class="btn-box-create">
+        ➕ Crear torneo
+    </a>
+</div>
+
+<!-- TABLA -->
 {% if tournaments %}
-<table border="1" cellpadding="6">
+<table class="table-rubik">
     <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Ubicación</th>
-        <th>Fecha</th>
-        <th>Acciones</th>
-    </tr>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
     </thead>
 
     <tbody>
-    {% for t in tournaments %}
+        {% for t in tournaments %}
         <tr>
             <td>{{ t.id }}</td>
             <td>{{ t.name }}</td>
             <td>{{ t.location }}</td>
             <td>{{ t.date }}</td>
-            <td>
-                <form method="post" action="/tournaments/{{ t.id }}/delete" style="display:inline;">
-                    <button type="submit" style="color:red;">🗑️ Eliminar</button>
+
+            <td class="actions">
+                <form method="post" action="/tournaments/{{ t.id }}/delete"
+                      onsubmit="return confirm('¿Eliminar torneo?')">
+                    <button class="btn-delete" type="submit">🗑️ Eliminar</button>
                 </form>
             </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
+
 {% else %}
-<p>No hay torneos registrados aún.</p>
+<p class="empty-msg">No hay torneos registrados aún.</p>
 {% endif %}
+
 {% endblock %}
+

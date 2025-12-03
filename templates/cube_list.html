@@ -1,30 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}Listado Cubos{% endblock %}
+{% block title %}Listado de Cubos{% endblock %}
 
 {% block content %}
-<h1>Listado de Cubos Rubik</h1>
 
-<a href="/cubes/new">➕ Crear nuevo cubo</a>
-<br><br>
+<div class="page-header">
+
+    <div class="page-left">
+        <!-- ICONO PNG TRANSPARENTE -->
+        <img src="https://cdn-icons-png.flaticon.com/512/480/480382.png" 
+             alt="cube icon"
+             class="side-icon">
+
+        <h1 class="page-title">Listado de Cubos Rubik</h1>
+    </div>
+
+    <a href="/cubes/new" class="btn-box-create">➕ Crear nuevo cubo</a>
+
+</div>
 
 {% if cubes %}
-<table border="1" cellspacing="0" cellpadding="6">
+<table class="table-rubik">
     <thead>
-    <tr>
-        <th>ID</th>
-        <th>Marca</th>
-        <th>Mecanismo</th>
-        <th>Piezas</th>
-        <th>Dificultad</th>
-        <th>Competición?</th>
-        <th>World Record</th>
-        <th>Acciones</th>
-    </tr>
+        <tr>
+            <th>ID</th>
+            <th>Marca</th>
+            <th>Mecanismo</th>
+            <th>Piezas</th>
+            <th>Dificultad</th>
+            <th>Competición?</th>
+            <th>World Record</th>
+            <th>Acciones</th>
+        </tr>
     </thead>
 
     <tbody>
-    {% for cube in cubes %}
+        {% for cube in cubes %}
         <tr>
             <td>{{ cube.id }}</td>
             <td>{{ cube.brand }}</td>
@@ -34,19 +45,23 @@
             <td>{{ "Sí" if cube.is_competition else "No" }}</td>
             <td>{{ cube.world_record }}</td>
 
-            <td style="display:flex; gap:8px">
-                <a href="/cubes/{{ cube.id }}/edit">✏️ Editar</a>
+            <td class="actions">
+                <a class="btn-edit" href="/cubes/{{ cube.id }}/edit">✏️ Editar</a>
 
-                <form method="post" action="/cubes/{{ cube.id }}/delete" onsubmit="return confirm('¿Eliminar cubo?')">
-                    <button type="submit">🗑️ Eliminar</button>
+                <form action="/cubes/{{ cube.id }}/delete" method="post"
+                    onsubmit="return confirm('¿Eliminar cubo?')">
+                    <button class="btn-delete" type="submit">🗑️ Eliminar</button>
                 </form>
             </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
+
 </table>
+
 {% else %}
-<p>No hay cubos registrados aún.</p>
+<p class="empty-msg">No hay cubos registrados aún.</p>
 {% endif %}
+
 {% endblock %}
 

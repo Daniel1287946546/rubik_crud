@@ -3,13 +3,25 @@
 {% block title %}Competidores{% endblock %}
 
 {% block content %}
-<h1>Listado de Competidores</h1>
 
-<a href="/competitors/new">➕ Crear competidor</a>
-<br><br>
+<div class="page-header">
+
+    <div class="page-left">
+        <!-- ICONO PRINCIPAL COMPETIDORES -->
+        <img 
+            src="https://www.parqueexplora.org/_next/image?url=https%3A%2F%2Fcdn.cosmicjs.com%2F811fb0e0-fc13-11ee-bec5-7f9403a32f29-CuboRubik-Torneo-Web.jpg&w=3840&q=75"
+            class="side-icon"
+            alt="competitor icon">
+
+        <h1 class="page-title">Listado de Competidores</h1>
+    </div>
+
+    <a href="/competitors/new" class="btn-box-create">➕ Crear competidor</a>
+</div>
+
 
 {% if competitors %}
-<table border="1" cellspacing="0" cellpadding="6">
+<table class="table-rubik">
     <thead>
     <tr>
         <th>ID</th>
@@ -32,13 +44,12 @@
             <td>{{ c.cube.brand if c.cube else '—' }}</td>
             <td>{{ c.tournament.name if c.tournament else '—' }}</td>
 
-            <td style="display:flex; gap:8px">
-
-                <a href="/competitors/{{ c.id }}/edit">✏️ Editar</a>
+            <td class="actions">
+                <a class="btn-edit" href="/competitors/{{ c.id }}/edit">✏️ Editar</a>
 
                 <form method="post" action="/competitors/{{ c.id }}/delete"
                       onsubmit="return confirm('¿Eliminar competidor?')">
-                    <button type="submit">🗑️ Eliminar</button>
+                    <button class="btn-delete" type="submit">🗑️ Eliminar</button>
                 </form>
             </td>
         </tr>
@@ -47,8 +58,7 @@
 </table>
 
 {% else %}
-<p>No hay competidores registrados aún.</p>
+<p class="empty-msg">No hay competidores registrados aún.</p>
 {% endif %}
 
 {% endblock %}
-

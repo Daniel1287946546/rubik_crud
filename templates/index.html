@@ -3,14 +3,36 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-<h1>Bienvenido a Rubik CRUD</h1>
-<p>Servidor funcionando correctamente.</p>
 
-<ul>
-    <li><a href="/cubes">📦 Gestión de Cubos</a></li>
-    <li><a href="/competitors">👤 Gestión de Competidores</a></li>
-    <li><a href="/tournaments">🏆 Gestión de Torneos</a></li>
-    <li><a href="/records">⏱️ Gestión de Records</a></li>
-</ul>
+<div class="home-top">
+    <h1 class="home-title">Bienvenido a Rubik</h1>
+
+
+</div>
+
+<div class="home-grid">
+
+    <a href="/cubes" class="menu-card">
+        <img src="https://static.vecteezy.com/system/resources/previews/015/606/178/non_2x/cute-cube-illustration-a-concept-in-cartoon-free-vector.jpg" alt="Cubos">
+        <h3>📦 Gestión de Cubos</h3>
+    </a>
+
+    <a href="/competitors" class="menu-card">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYZ81E8E3-5SsCirjzmEJHdSm9YIAUkQDBIXCNNEfhGmuqcQp1C9DANXJBC4w7snI8FZVlA-NGrqsqIPCn8_FcvV3NLdIyI3_yXM0hd62lCcjym1IE60itG5G_6mKHU-M0-ndK5h7Oolu_/s1600/d7663bcdecb4731ca4be329100bd5b03.jpg" alt="Competidores">
+        <h3>👤 Gestión de Competidores</h3>
+    </a>
+
+    <a href="/tournaments" class="menu-card">
+        <img src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/KEOAVNDXQRCU7ONBPNJKHXCBPM.jpg" alt="Torneos">
+        <h3>🏆 Gestión de Torneos</h3>
+    </a>
+
+    <a href="/records" class="menu-card">
+        <img src="https://i.pinimg.com/236x/9c/7e/dc/9c7edcc45967feaca84e51e67558c9ee.jpg" alt="Records">
+        <h3>⏱️ Gestión de Records</h3>
+    </a>
+
+</div>
 
 {% endblock %}
+
