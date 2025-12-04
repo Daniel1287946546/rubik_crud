@@ -61,9 +61,8 @@ record_edit.html
 INSTALACIÓN Y CONFIGURACIÓN
 
 Clonar el repositorio
-git clone https://github.com/tuusuario/rubik-crud.git
+git clone (https://github.com/Daniel1287946546/rubik_crud.git)
 
-cd rubik-crud
 
 Instalar dependencias
 pip install -r requirements.txt
