@@ -61,9 +61,8 @@ record_edit.html
 INSTALACIÓN Y CONFIGURACIÓN
 
 Clonar el repositorio
-git clone https://github.com/tuusuario/rubik-crud.git
+git clone (https://github.com/Daniel1287946546/rubik_crud.git)
 
-cd rubik-crud
 
 Instalar dependencias
 pip install -r requirements.txt
@@ -104,7 +103,7 @@ INTERFAZ Y DISEÑO
 • Diseño responsive
 • Imágenes redondas con borde de brillo
 
-REQUIREMENTS (POR SI HACE FALTA)
+REQUIREMENTS 
 
 fastapi
 uvicorn
@@ -124,9 +123,4 @@ Subir cambios
 
 Abrir Pull Request
 
-AUTOR
 
-Tu Nombre
-GitHub: https://github.com/tuusuario
-
-Email: tuemail@example.com
