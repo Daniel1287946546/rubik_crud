@@ -7,10 +7,9 @@
 <div class="page-header">
 
     <div class="page-left">
-        <!-- ICONO PRINCIPAL COMPETIDORES -->
         <img 
-            src="https://www.parqueexplora.org/_next/image?url=https%3A%2F%2Fcdn.cosmicjs.com%2F811fb0e0-fc13-11ee-bec5-7f9403a32f29-CuboRubik-Torneo-Web.jpg&w=3840&q=75"
-            class="side-icon"
+            src="https://i.pinimg.com/736x/05/b9/e4/05b9e43b61a8fd186cea354f2454a1a7.jpg"
+            class="side-icon competitors"
             alt="competitor icon">
 
         <h1 class="page-title">Listado de Competidores</h1>
@@ -19,37 +18,48 @@
     <a href="/competitors/new" class="btn-box-create">➕ Crear competidor</a>
 </div>
 
-
 {% if competitors %}
+<table class="table-rubik">
+
     <thead>
-    <tr>
-        <th>ID</th>
-        <th>Foto</th>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Tiempo promedio</th>
-        <th>Cubo</th>
-        <th>Torneo</th>
-        <th>Acciones</th>
-    </tr>
+        <tr>
+            <th>ID</th>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>País</th>
+            <th>Tiempo promedio</th>
+            <th>Cubo</th>
+            <th>Torneo</th>
+            <th>Acciones</th>
+        </tr>
     </thead>
 
     <tbody>
-    {% for c in competitors %}
+        {% for c in competitors %}
         <tr>
             <td>{{ c.id }}</td>
+
             <td>
                 {% if c.image_url %}
-                    <img src="{{ c.image_url }}" alt="{{ c.name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                    <img src="{{ c.image_url }}"
+                         style="
+                            width: 70px;
+                            height: 70px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            border: 3px solid rgba(0,255,255,.35);
+                            box-shadow: 0 0 16px rgba(0,255,255,.25);
+                         ">
                 {% else %}
-                    <span>📷</span>
+                    <span style="opacity: .4;">📷</span>
                 {% endif %}
             </td>
+
             <td>{{ c.name }}</td>
             <td>{{ c.country }}</td>
             <td>{{ c.average_time }}</td>
-            <td>{{ c.cube.brand if c.cube else '—' }}</td>
-            <td>{{ c.tournament.name if c.tournament else '—' }}</td>
+            <td>{{ c.cube.brand if c.cube else "—" }}</td>
+            <td>{{ c.tournament.name if c.tournament else "—" }}</td>
 
             <td class="actions">
                 <a class="btn-edit" href="/competitors/{{ c.id }}/edit">✏️ Editar</a>
@@ -60,8 +70,9 @@
                 </form>
             </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
+
 </table>
 
 {% else %}

@@ -153,6 +153,7 @@ button:hover {
     transform: translateY(-2px);
 }
 
+/* HEADER DE SECCIONES */
 .page-header {
     width: 100%;
     display: flex;
@@ -176,17 +177,12 @@ button:hover {
     text-shadow: 0px 0px 14px rgba(0,200,255,.25);
 }
 
+/* ICONOS DE LISTAS */
 .side-icon {
     width: 180px;
     height: 180px;
     object-fit: cover;
     border-radius: 50%;
-}
-
-.side-icon.cubes {
-    box-shadow:
-        0 0 25px rgba(0,255,255,.4),
-        0 0 45px rgba(0,255,255,.2);
 }
 
 .side-icon.competitors {
@@ -195,41 +191,7 @@ button:hover {
         0 0 45px rgba(0,150,255,.2);
 }
 
-.side-icon.tournaments {
-    box-shadow:
-        0 0 25px rgba(255,215,0,.45),
-        0 0 45px rgba(255,215,0,.3);
-}
-
-.side-icon.records {
-    box-shadow:
-        0 0 25px rgba(200,0,255,.45),
-        0 0 45px rgba(200,0,255,.25);
-}
-
-.btn-box-create {
-    display: inline-block;
-    padding: 16px 28px;
-    border-radius: 14px;
-    background: linear-gradient(90deg, #00eaff, #3a86ff);
-    color: #0b111d;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: .5px;
-    text-decoration: none;
-    box-shadow: 
-        0 8px 20px rgba(0,255,255,.25),
-        0 0 25px rgba(0,190,255,.2);
-    transition: .3s;
-}
-
-.btn-box-create:hover {
-    transform: translateY(-6px);
-    box-shadow:
-        0 10px 28px rgba(0,255,255,.45),
-        0 0 35px rgba(0,190,255,.35);
-}
-
+/* TABLA GENERAL */
 .table-rubik {
     width: 100%;
     margin-top: 35px;
@@ -266,6 +228,7 @@ button:hover {
     font-size: .93rem;
 }
 
+/* BORDES */
 .table-rubik tbody tr td:first-child {
     border-radius: 10px 0 0 10px;
 }
@@ -274,6 +237,7 @@ button:hover {
     border-radius: 0 10px 10px 0;
 }
 
+/* BOTONES */
 .actions {
     display: flex;
     justify-content: center;
@@ -309,12 +273,14 @@ button:hover {
     transform: scale(1.03);
 }
 
+/* NO DATA */
 .empty-msg {
     margin-top: 25px;
     opacity: .7;
     font-size: 1.05rem;
 }
 
+/* RESPONSIVE */
 @media(max-width: 720px) {
     main {
         width: 92%;
@@ -334,6 +300,7 @@ button:hover {
         height: 120px;
     }
 }
+
 
 
 
