@@ -58,7 +58,6 @@ project/
 
 │
 └── templates/
-
     ├── base.html
     
     ├── index.html
