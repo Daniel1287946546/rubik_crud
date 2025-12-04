@@ -56,7 +56,7 @@ project/
     ├── record_form.html
     └── record_edit.html
 
-    | Relación                      | Tipo | Descripción                                               |
+| Relación                      | Tipo | Descripción                                               |
 | ----------------------------- | ---- | --------------------------------------------------------- |
 | Tournament → Competitor       | 1:N  | Un torneo puede tener múltiples competidores registrados. |
 | Tournament → CompetitorRecord | 1:N  | Un torneo puede tener múltiples récords asociados.        |
