@@ -1,4 +1,3 @@
-/* ===================== 🌈 GLOBAL RESET ===================== */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,6 @@
     font-family: "Segoe UI", Poppins, sans-serif;
 }
 
-/* ===================== 🌌 APP BACKGROUND ===================== */
 body {
     background: linear-gradient(135deg, #0b0d18, #12172a);
     color: #e2e2e2;
@@ -15,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* ===================== 🧭 NAVBAR ===================== */
 header {
     background: rgba(255,255,255,0.06);
     backdrop-filter: blur(8px);
@@ -42,7 +39,6 @@ nav a:hover {
     text-shadow: 0 0 8px #00eaff;
 }
 
-/* ===================== 📦 MAIN CONTAINER ===================== */
 main {
     width: 80%;
     margin: auto;
@@ -52,7 +48,6 @@ main {
     align-items: center;
 }
 
-/* ================================= 🎯 HOME — TÍTULO ============================== */
 .home-title {
     font-size: 4rem;
     font-weight: 900;
@@ -65,7 +60,6 @@ main {
     text-shadow: 0 0 14px rgba(0,200,255,.3);
 }
 
-/* ================================= 🔗 HOME GRID ============================== */
 .home-grid {
     width: 100%;
     max-width: 800px;
@@ -76,7 +70,6 @@ main {
     margin-top: 20px;
 }
 
-/* ================================= 🚀 HOME CARD ============================== */
 .menu-card {
     width: 340px;
     min-height: 380px;
@@ -113,7 +106,6 @@ main {
     font-weight: 600;
 }
 
-/* ===================== 📝 FORMULARIOS ===================== */
 form {
     background: rgba(255,255,255,0.08);
     padding: 28px;
@@ -144,7 +136,6 @@ input:focus, select:focus {
     box-shadow: 0 0 6px #00eaff;
 }
 
-/* ===================== 🔘 BUTTONS ===================== */
 button {
     padding: 10px;
     background: linear-gradient(90deg, #00eaff, #3a86ff);
@@ -162,7 +153,6 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* ===================== 🧊 PAGE HEADER ===================== */
 .page-header {
     width: 100%;
     display: flex;
@@ -186,7 +176,6 @@ button:hover {
     text-shadow: 0px 0px 14px rgba(0,200,255,.25);
 }
 
-/* 🎨 ICONOS DE LOS LISTADOS (GENERAL) */
 .side-icon {
     width: 180px;
     height: 180px;
@@ -194,35 +183,30 @@ button:hover {
     border-radius: 50%;
 }
 
-/* 🧩 IMAGEN — CUBOS */
 .side-icon.cubes {
     box-shadow:
         0 0 25px rgba(0,255,255,.4),
         0 0 45px rgba(0,255,255,.2);
 }
 
-/* 👤 IMAGEN — COMPETIDORES */
 .side-icon.competitors {
     box-shadow:
         0 0 25px rgba(0,150,255,.4),
         0 0 45px rgba(0,150,255,.2);
 }
 
-/* 🏆 IMAGEN — TORNEOS */
 .side-icon.tournaments {
     box-shadow:
         0 0 25px rgba(255,215,0,.45),
         0 0 45px rgba(255,215,0,.3);
 }
 
-/* 🏁 IMAGEN — RECORDS (MORADO) */
 .side-icon.records {
     box-shadow:
         0 0 25px rgba(200,0,255,.45),
         0 0 45px rgba(200,0,255,.25);
 }
 
-/* ===================== 🔥 BOTÓN CREAR ===================== */
 .btn-box-create {
     display: inline-block;
     padding: 16px 28px;
@@ -246,7 +230,6 @@ button:hover {
         0 0 35px rgba(0,190,255,.35);
 }
 
-/* ===================== 📋 TABLAS RUBIK ===================== */
 .table-rubik {
     width: 100%;
     margin-top: 35px;
@@ -283,7 +266,6 @@ button:hover {
     font-size: .93rem;
 }
 
-/* Bordes redondeados */
 .table-rubik tbody tr td:first-child {
     border-radius: 10px 0 0 10px;
 }
@@ -292,14 +274,12 @@ button:hover {
     border-radius: 0 10px 10px 0;
 }
 
-/* ===================== 🎛️ ACCIONES ===================== */
 .actions {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
-/* EDITAR */
 .btn-edit {
     padding: 6px 14px;
     color: #ffb74a;
@@ -313,7 +293,6 @@ button:hover {
     text-shadow: 0 0 8px rgba(255,200,100,.5);
 }
 
-/* ELIMINAR */
 .btn-delete {
     padding: 10px 22px;
     border: none;
@@ -330,14 +309,12 @@ button:hover {
     transform: scale(1.03);
 }
 
-/* ===================== 🪧 MENSAJE VACÍO ===================== */
 .empty-msg {
     margin-top: 25px;
     opacity: .7;
     font-size: 1.05rem;
 }
 
-/* ===================== 📱 RESPONSIVE ===================== */
 @media(max-width: 720px) {
     main {
         width: 92%;
