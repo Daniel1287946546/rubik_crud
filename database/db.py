@@ -7,7 +7,7 @@ db_name = "db.sqlite3"
 db_url = f"sqlite:///{db_name}"
 
 # Crear motor de SQLModel
-engine = create_engine(db_url, echo=True)
+engine = create_engine(db_url)
 
 # Función para crear todas las tablas
 def create_tables():
