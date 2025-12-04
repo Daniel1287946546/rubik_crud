@@ -7,7 +7,6 @@
 <div class="page-header">
 
     <div class="page-left">
-        <!-- Imagen redonda para Records -->
         <img src="https://i.pinimg.com/736x/fe/5a/f0/fe5af04cf15a3ea2f9a19321721cb8f2.jpg"
              alt="records"
              class="side-icon records">
@@ -26,6 +25,7 @@
         <th>ID</th>
         <th>Competidor</th>
         <th>Cubo</th>
+        <th>Evento</th>              <!-- ⭐ NUEVO -->
         <th>Tiempo (seg)</th>
         <th>Acciones</th>
     </tr>
@@ -37,7 +37,11 @@
             <td>{{ r.id }}</td>
             <td>{{ r.competitor.name if r.competitor else 'N/A' }}</td>
             <td>{{ r.cube.brand if r.cube else 'N/A' }}</td>
-            <td>{{ r.solve_time }}</td>
+
+            <!-- ⭐ Muestra el tipo de evento -->
+            <td>{{ r.event_type|capitalize }}</td>
+
+            <td>{{ r.record_time }}</td>
 
             <td class="actions">
                 <a href="/records/{{ r.id }}/edit" class="btn-edit">✏️ Editar</a>

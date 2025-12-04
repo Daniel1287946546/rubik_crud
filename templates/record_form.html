@@ -3,7 +3,16 @@
 {% block title %}Nuevo Record{% endblock %}
 
 {% block content %}
-<h1>Registrar Nuevo Record</h1>
+
+<div class="page-header">
+    <div class="page-left">
+        <img src="https://i.pinimg.com/736x/fe/5a/f0/fe5af04cf15a3ea2f9a19321721cb8f2.jpg"
+             alt="records"
+             class="side-icon records">
+
+        <h1 class="page-title">Registrar Nuevo Record</h1>
+    </div>
+</div>
 
 <form method="post" action="/records/new">
 
@@ -38,8 +47,7 @@
         {% endfor %}
     </select>
 
-    <br><br>
-    <button type="submit">Guardar Record</button>
+    <button type="submit">💾 Guardar Record</button>
 </form>
 
 {% endblock %}

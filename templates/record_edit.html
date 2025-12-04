@@ -3,32 +3,57 @@
 {% block title %}Editar Record{% endblock %}
 
 {% block content %}
-<h1>✏️ Editar Record</h1>
+
+<div class="page-header">
+    <div class="page-left">
+        <img src="https://i.pinimg.com/736x/fe/5a/f0/fe5af04cf15a3ea2f9a19321721cb8f2.jpg"
+             alt="records"
+             class="side-icon records">
+
+        <h1 class="page-title">✏️ Editar Record</h1>
+    </div>
+</div>
 
 <form method="post" action="/records/{{ record.id }}/edit">
 
     <label>Competidor:</label>
     <select name="competitor_id" required>
         {% for c in competitors %}
-        <option value="{{ c.id }}" {% if c.id == record.competitor_id %}selected{% endif %}>
-            {{ c.name }} ({{ c.country }})
-        </option>
+            <option value="{{ c.id }}" {% if c.id == record.competitor_id %}selected{% endif %}>
+                {{ c.name }} ({{ c.country }})
+            </option>
         {% endfor %}
     </select>
 
     <label>Cubo:</label>
     <select name="cube_id" required>
         {% for cube in cubes %}
-        <option value="{{ cube.id }}" {% if cube.id == record.cube_id %}selected{% endif %}>
-            {{ cube.brand }} - {{ cube.pieces }} piezas
-        </option>
+            <option value="{{ cube.id }}" {% if cube.id == record.cube_id %}selected{% endif %}>
+                {{ cube.brand }} - {{ cube.pieces }} piezas
+            </option>
         {% endfor %}
     </select>
 
-    <label>Tiempo (segundos):</label>
-    <input type="number" name="solve_time" step="0.01" min="0" value="{{ record.solve_time }}" required>
+    <label>Tipo de evento:</label>
+    <select name="event_type" required>
+        <option value="single" {% if record.event_type == 'single' %}selected{% endif %}>Single</option>
+        <option value="average" {% if record.event_type == 'average' %}selected{% endif %}>Average</option>
+    </select>
 
-    <br><br>
+    <label>Tiempo (segundos):</label>
+    <input type="number" name="record_time" step="0.01" min="0"
+           value="{{ record.record_time }}" required>
+
+    <label>Torneo (opcional):</label>
+    <select name="tournament_id">
+        <option value="">-- Ninguno --</option>
+        {% for t in tournaments %}
+            <option value="{{ t.id }}" {% if t.id == record.tournament_id %}selected{% endif %}>
+                {{ t.name }}
+            </option>
+        {% endfor %}
+    </select>
+
     <button type="submit">💾 Actualizar</button>
 
 </form>
