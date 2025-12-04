@@ -17,43 +17,74 @@ Tecnologías Principales
 Estructuta 
 project/
 │── main.py
+
 │── requirements.txt
+
 │── cloudinary_config.py
+
 │── .env
+
 │
 ├── database/
 │   └── db.py
 │
 ├── models/
+
 │   ├── cube.py
+
 │   ├── competitor.py
+
 │   ├── competitor_record.py
+
 │   └── tournament.py
+
 │
 ├── routers/
+
 │   ├── cube_router.py
+
 │   ├── competitor_router.py
+
 │   ├── tournament_router.py
+
 │   └── record_router.py
+
 │
 ├── static/
+
 │   ├── styles.css
+
 │   └── uploads/
+
 │
 └── templates/
+
     ├── base.html
+    
     ├── index.html
+    
     ├── cube_list.html
+    
     ├── cube_form.html
+    
     ├── cube_edit.html
+    
     ├── competitor_list.html
+    
     ├── competitor_form.html
+    
     ├── competitor_edit.html
+    
     ├── tournament_list.html
+    
     ├── tournament_form.html
+    
     ├── tournament_edit.html
+    
     ├── record_list.html
+    
     ├── record_form.html
+    
     └── record_edit.html
 
 
