@@ -13,15 +13,6 @@ Cloudinary → Gestión y subida de imágenes
 Uvicorn → Servidor
 Python-dotenv → Variables de entorno
 
-FUNCIONALIDADES
-
-✔ CRUD de Cubos
-✔ CRUD de Competidores con fotos
-✔ CRUD de Torneos
-✔ CRUD de Récords
-✔ Interfaz moderna tipo glassmorphism
-✔ Totalmente responsive
-✔ Almacenamiento de imágenes en Cloudinary
 
 ESTRUCTURA DEL PROYECTO
 
