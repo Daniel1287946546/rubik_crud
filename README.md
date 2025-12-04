@@ -14,9 +14,7 @@ Tecnologías Principales
 🚀 Uvicorn              → Servidor ASGI  
 🔐 python-dotenv        → Variables de entorno  
 
-
-Estructura del Proyecto
-
+Estructuta 
 project/
 │── main.py
 │── requirements.txt
@@ -39,13 +37,15 @@ project/
 │   └── record_router.py
 │
 ├── static/
-│   └── styles.css
+│   ├── styles.css
+│   └── uploads/
 │
 └── templates/
     ├── base.html
     ├── index.html
     ├── cube_list.html
     ├── cube_form.html
+    ├── cube_edit.html
     ├── competitor_list.html
     ├── competitor_form.html
     ├── competitor_edit.html
@@ -55,6 +55,7 @@ project/
     ├── record_list.html
     ├── record_form.html
     └── record_edit.html
+
 
 | Relación                      | Tipo | Descripción                                               |
 | ----------------------------- | ---- | --------------------------------------------------------- |
