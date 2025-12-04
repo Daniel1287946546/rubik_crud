@@ -58,32 +58,20 @@ project/
 
 │
 └── templates/
+
     ├── base.html
-    
     ├── index.html
-    
     ├── cube_list.html
-    
     ├── cube_form.html
-    
     ├── cube_edit.html
-    
     ├── competitor_list.html
-    
     ├── competitor_form.html
-    
     ├── competitor_edit.html
-    
     ├── tournament_list.html
-    
     ├── tournament_form.html
-    
     ├── tournament_edit.html
-    
-    ├── record_list.html
-    
+    ├── record_list.html 
     ├── record_form.html
-    
     └── record_edit.html
 
 
