@@ -18,65 +18,51 @@
     <a href="/competitors/new" class="btn-box-create">➕ Crear competidor</a>
 </div>
 
+
 {% if competitors %}
-<table class="table-rubik">
 
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Foto</th>
-            <th>Nombre</th>
-            <th>País</th>
-            <th>Tiempo promedio</th>
-            <th>Cubo</th>
-            <th>Torneo</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
+    {% for c in competitors %}
+    <div class="competitor-card">
 
-    <tbody>
-        {% for c in competitors %}
-        <tr>
-            <td>{{ c.id }}</td>
+        <!-- FOTO DEL COMPETIDOR -->
+        {% if c.image_url %}
+            <img src="{{ c.image_url }}" class="competitor-photo">
+        {% else %}
+            <div class="competitor-photo" 
+                 style="display:flex;justify-content:center;align-items:center;font-size:3rem;opacity:.3;">
+                 📷
+            </div>
+        {% endif %}
 
-            <td>
-                {% if c.image_url %}
-                    <img src="{{ c.image_url }}"
-                         style="
-                            width: 70px;
-                            height: 70px;
-                            border-radius: 50%;
-                            object-fit: cover;
-                            border: 3px solid rgba(0,255,255,.35);
-                            box-shadow: 0 0 16px rgba(0,255,255,.25);
-                         ">
-                {% else %}
-                    <span style="opacity: .4;">📷</span>
-                {% endif %}
-            </td>
+        <!-- INFORMACIÓN DEL COMPETIDOR -->
+        <div class="card-info">
+            <p><strong>ID:</strong> {{ c.id }}</p>
+            <p><strong>Nombre:</strong> {{ c.name }}</p>
+            <p><strong>País:</strong> {{ c.country }}</p>
+            <p><strong>Tiempo promedio:</strong> {{ c.average_time }} seg</p>
+            <p><strong>Cubo:</strong> {{ c.cube.brand if c.cube else "—" }}</p>
+            <p><strong>Torneo:</strong> {{ c.tournament.name if c.tournament else "—" }}</p>
+        </div>
 
-            <td>{{ c.name }}</td>
-            <td>{{ c.country }}</td>
-            <td>{{ c.average_time }}</td>
-            <td>{{ c.cube.brand if c.cube else "—" }}</td>
-            <td>{{ c.tournament.name if c.tournament else "—" }}</td>
+        <!-- ACCIONES -->
+        <div class="card-actions">
 
-            <td class="actions">
-                <a class="btn-edit" href="/competitors/{{ c.id }}/edit">✏️ Editar</a>
+            <a class="btn-edit" href="/competitors/{{ c.id }}/edit">✏️ Editar</a>
 
-                <form method="post" action="/competitors/{{ c.id }}/delete"
-                      onsubmit="return confirm('¿Eliminar competidor?')">
-                    <button class="btn-delete" type="submit">🗑️ Eliminar</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+            <form method="post" action="/competitors/{{ c.id }}/delete"
+                  onsubmit="return confirm('¿Eliminar competidor?')">
+                <button class="btn-delete" type="submit">🗑️ Eliminar</button>
+            </form>
 
-</table>
+        </div>
+
+    </div>
+    {% endfor %}
 
 {% else %}
+
 <p class="empty-msg">No hay competidores registrados aún.</p>
+
 {% endif %}
 
 {% endblock %}
