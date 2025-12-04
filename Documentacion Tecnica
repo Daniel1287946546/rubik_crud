@@ -1,0 +1,288 @@
+# 🧊 Sistema Rubik CRUD — Documentación Completa
+
+## 📌 1. Introducción
+
+El sistema **Rubik CRUD** es una aplicación web desarrollada con **FastAPI**, **SQLModel**, **Jinja2**, **CSS** y **Cloudinary**, diseñada para administrar:
+
+- Cubos
+- Competidores (con imagen)
+- Torneos
+- Records de Competidores
+
+Incluye un frontend estilizado y un backend completamente funcional, con un diseño moderno estilo *glassmorphism*.
+
+---
+
+## 🏗 2. Arquitectura del Proyecto
+
+```
+project/
+│── main.py
+│── requirements.txt
+│── .env
+│── cloudinary_config.py
+│
+│── database/
+│   └── db.py
+│
+│── models/
+│   ├── cube.py
+│   ├── competitor.py
+│   ├── competitor_record.py
+│   └── tournament.py
+│
+│── static/
+│   └── styles.css
+│
+└── templates/
+    ├── base.html
+    ├── index.html
+    ├── cube_list.html
+    ├── cube_form.html
+    ├── competitor_list.html
+    ├── competitor_form.html
+    ├── competitor_edit.html
+    ├── tournament_list.html
+    ├── tournament_form.html
+    ├── tournament_edit.html
+    ├── record_list.html
+    ├── record_form.html
+    └── record_edit.html
+```
+
+---
+
+## 🧩 3. Tecnologías Principales
+
+| Componente | Tecnología |
+|-----------|------------|
+| Backend | FastAPI |
+| ORM | SQLModel |
+| Base de Datos | SQLite / PostgreSQL |
+| Templates | Jinja2 |
+| Estilos | CSS |
+| Cloud Storage | Cloudinary |
+| Entorno | python-dotenv |
+| Servidor | Uvicorn |
+
+---
+
+## ⚙ 4. Configuración del Entorno
+
+### 4.1 Instalar dependencias
+
+```
+pip install -r requirements.txt
+```
+
+### 4.2 Crear archivo `.env`
+
+```
+CLOUDINARY_CLOUD_NAME=tu_nombre
+CLOUDINARY_API_KEY=tu_api_key
+CLOUDINARY_API_SECRET=tu_api_secret
+```
+
+---
+
+## ☁ 5. Configuración de Cloudinary
+
+Archivo: `cloudinary_config.py`
+
+```python
+import cloudinary
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
+```
+
+---
+
+## 🗄 6. Base de Datos
+
+Relaciones principales:
+
+- `Competitor` → `Cube` (Many-to-One)
+- `Competitor` → `Tournament`  
+- `CompetitorRecord` → `Competitor`
+- `CompetitorRecord` → `Cube`
+- `CompetitorRecord` → `Tournament`
+
+---
+
+## 🔧 7. Backend (main.py)
+
+### Endpoints principales por módulo:
+
+### 🔹 Cubes
+- GET `/cubes`  
+- POST `/cubes/new`
+- GET `/cubes/{id}/edit`
+- POST `/cubes/{id}/edit`
+- POST `/cubes/{id}/delete`
+
+### 🔹 Competitors
+- GET `/competitors`
+- POST `/competitors/new`
+- GET `/competitors/{id}/edit`
+- POST `/competitors/{id}/edit`
+- POST `/competitors/{id}/delete`
+- Con subida de imágenes a Cloudinary
+
+### 🔹 Tournaments
+- GET `/tournaments`
+- CRUD completo
+
+### 🔹 Records
+- GET `/records`
+- CRUD completo
+
+---
+
+## 🌐 8. Frontend (HTML)
+
+Se usa `base.html` como plantilla principal.
+
+Características:
+- Página responsive
+- Cards visuales
+- Tablas con glassmorphism
+- Headers con gradientes
+- Imágenes de Cloudinary redondeadas
+- Botones modernos
+
+---
+
+## 🎨 9. Estilos (CSS)
+
+Incluye:
+- Fondo con gradiente
+- Componentes con blur
+- Cards animadas
+- Tablas modernas
+- Estilo oscuro elegante
+- Fotos redondeadas
+- Responsive total
+
+---
+
+## 📤 10. Subida de Imágenes
+
+Uso en `main.py`:
+
+```python
+result = cloudinary.uploader.upload(image.file)
+image_url = result["secure_url"]
+```
+
+Se almacena la URL en la BD.
+
+---
+
+## ▶ 11. Ejecución del Proyecto
+
+```
+uvicorn main:app --reload
+```
+
+Abrir en navegador:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 📘 12. Manual de Usuario
+
+### Desde el menú principal puedes acceder a:
+- Cubos
+- Competidores
+- Torneos
+- Records
+
+Cada sección permite:
+- Ver elementos
+- Crear
+- Editar
+- Eliminar
+
+Los competidores pueden subir foto desde su dispositivo.
+
+---
+
+## 🛠 13. Manual Técnico
+
+### Arquitectura Interna
+- FastAPI maneja las rutas  
+- SQLModel maneja la base de datos  
+- Jinja2 renderiza HTML  
+- Cloudinary gestiona las imágenes  
+- CSS aplica estilos avanzados  
+
+### Organización
+- Modelos aislados
+- Plantillas separadas por sección
+- Archivo único `main.py` para rutas
+- Configuración aparte para Cloudinary y DB
+
+---
+
+## 📝 14. README.md (versión lista para GitHub)
+
+```
+# 🧊 Rubik CRUD — FastAPI + Cloudinary
+
+Este es un sistema completo de gestión de cubos Rubik, competidores, torneos y récords, usando:
+
+- FastAPI
+- SQLModel
+- Jinja2
+- Cloudinary
+- CSS avanzado
+- Uvicorn
+
+## 🚀 Funcionalidades
+✔ CRUD de cubos  
+✔ CRUD de competidores con foto  
+✔ CRUD de torneos  
+✔ CRUD de récords  
+✔ Imagen subida a la nube  
+✔ Interfaz estilo glassmorphism  
+
+## ▶ Ejecutar
+
+```
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+## 🔧 Configurar Cloudinary
+Crear archivo `.env`:
+
+```
+CLOUDINARY_CLOUD_NAME=xxx
+CLOUDINARY_API_KEY=xxx
+CLOUDINARY_API_SECRET=xxx
+```
+
+## 📚 Tecnologías
+FastAPI, SQLModel, Cloudinary, Jinja2, Uvicorn.
+```
+
+---
+
+
+
+
+
+
+
