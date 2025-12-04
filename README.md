@@ -1,101 +1,142 @@
 RUBIK CRUD — FastAPI + SQLModel + Cloudinary
 
-Sistema completo para gestionar Cubos Rubik, Competidores, Torneos y Récords.
-Incluye diseño moderno, subida de imágenes a Cloudinary y CRUDs completos.
-
-TECNOLOGÍAS PRINCIPALES
-
-FastAPI → Backend
-SQLModel → ORM + Base de datos
-SQLite / PostgreSQL → Almacenamiento
-Jinja2 → Plantillas HTML
-Cloudinary → Gestión y subida de imágenes
-Uvicorn → Servidor
-Python-dotenv → Variables de entorno
+Sistema completo para gestionar Cubos Rubik, Competidores, Torneos y Récords oficiales.
+Incluye CRUDs completos, subida de imágenes con Cloudinary, diseño moderno y arquitectura modular.
 
 
-ESTRUCTURA DEL PROYECTO
+Tecnologías Principales
+
+🧩 FastAPI               → Backend  
+🗄️ SQLModel             → ORM + Base de datos  
+🐘 PostgreSQL / SQLite  → Almacenamiento  
+🎨 Jinja2               → Templates HTML  
+🌩️ Cloudinary           → Subida de imágenes  
+🚀 Uvicorn              → Servidor ASGI  
+🔐 python-dotenv        → Variables de entorno  
+
+
+Estructura del Proyecto
 
 project/
-main.py
-requirements.txt
-.env
-cloudinary_config.py
+│── main.py
+│── requirements.txt
+│── cloudinary_config.py
+│── .env
+│
+├── database/
+│   └── db.py
+│
+├── models/
+│   ├── cube.py
+│   ├── competitor.py
+│   ├── competitor_record.py
+│   └── tournament.py
+│
+├── routers/
+│   ├── cube_router.py
+│   ├── competitor_router.py
+│   ├── tournament_router.py
+│   └── record_router.py
+│
+├── static/
+│   └── styles.css
+│
+└── templates/
+    ├── base.html
+    ├── index.html
+    ├── cube_list.html
+    ├── cube_form.html
+    ├── competitor_list.html
+    ├── competitor_form.html
+    ├── competitor_edit.html
+    ├── tournament_list.html
+    ├── tournament_form.html
+    ├── tournament_edit.html
+    ├── record_list.html
+    ├── record_form.html
+    └── record_edit.html
 
-database/
-db.py
-
-models/
-cube.py
-competitor.py
-competitor_record.py
-tournament.py
-
-static/
-styles.css
-
-templates/
-base.html
-index.html
-cube_list.html
-cube_form.html
-competitor_list.html
-competitor_form.html
-competitor_edit.html
-tournament_list.html
-tournament_form.html
-tournament_edit.html
-record_list.html
-record_form.html
-record_edit.html
-
-INSTALACIÓN Y CONFIGURACIÓN
-
-Clonar el repositorio
-git clone (https://github.com/Daniel1287946546/rubik_crud.git)
+    | Relación                      | Tipo | Descripción                                               |
+| ----------------------------- | ---- | --------------------------------------------------------- |
+| Tournament → Competitor       | 1:N  | Un torneo puede tener múltiples competidores registrados. |
+| Tournament → CompetitorRecord | 1:N  | Un torneo puede tener múltiples récords asociados.        |
+| Cube → Competitor             | 1:N  | Un cubo puede estar asociado a múltiples competidores.    |
+| Cube → CompetitorRecord       | 1:N  | Un cubo puede registrar múltiples récords.                |
+| Competitor → CompetitorRecord | 1:N  | Un competidor puede tener múltiples récords.              |
 
 
-Instalar dependencias
+Mapa de EndPoins
+| Método | Endpoint            | Descripción                           |
+| ------ | ------------------- | ------------------------------------- |
+| GET    | `/competitors`      | Lista todos los competidores          |
+| GET    | `/competitors/{id}` | Consulta un competidor por ID         |
+| POST   | `/competitors`      | Crea un nuevo competidor              |
+| PUT    | `/competitors/{id}` | Actualiza completamente un competidor |
+| DELETE | `/competitors/{id}` | Elimina un competidor                 |
+
+
+
+Cubes
+
+| Método | Endpoint      | Descripción             |
+| ------ | ------------- | ----------------------- |
+| GET    | `/cubes`      | Lista todos los cubos   |
+| GET    | `/cubes/{id}` | Consulta un cubo por ID |
+| POST   | `/cubes`      | Crea un nuevo cubo      |
+| PUT    | `/cubes/{id}` | Actualiza un cubo       |
+| DELETE | `/cubes/{id}` | Elimina un cubo         |
+
+
+Tournaments
+
+| Método | Endpoint            | Descripción               |
+| ------ | ------------------- | ------------------------- |
+| GET    | `/tournaments`      | Lista todos los torneos   |
+| GET    | `/tournaments/{id}` | Consulta un torneo por ID |
+| POST   | `/tournaments`      | Crea un torneo            |
+| PUT    | `/tournaments/{id}` | Actualiza un torneo       |
+| DELETE | `/tournaments/{id}` | Elimina un torneo         |
+
+Records
+
+| Método | Endpoint        | Descripción               |
+| ------ | --------------- | ------------------------- |
+| GET    | `/records`      | Lista todos los récords   |
+| GET    | `/records/{id}` | Consulta un récord por ID |
+| POST   | `/records`      | Crea un nuevo récord      |
+| PUT    | `/records/{id}` | Actualiza un récord       |
+| DELETE | `/records/{id}` | Elimina un récord         |
+
+
+Instalación y Configuración
+
+git clone https://github.com/Daniel1287946546/rubik_crud.git
+cd rubik_crud
+
+instalar dependencias
 pip install -r requirements.txt
 
-Crear archivo .env
-CLOUDINARY_CLOUD_NAME=tu_nombre
+Crear env.
+CLOUDINARY_CLOUD_NAME=tu_cloud
 CLOUDINARY_API_KEY=tu_api_key
 CLOUDINARY_API_SECRET=tu_api_secret
 
-Ejecutar servidor
+
+ejecutar en el servidor
+
 uvicorn main:app --reload
 
-Abrir en navegador:
-http://127.0.0.1:8000
+Abrir en navegador: http://127.0.0.1:8000
 
-SUBIDA DE IMÁGENES (CLOUDINARY)
 
-El sistema sube imágenes con:
+
+Subida de Imágenes (Cloudinary)
 
 result = cloudinary.uploader.upload(image.file)
 image_url = result["secure_url"]
 
-La URL se guarda en la BD y se usa en las vistas.
 
-MODELOS (RELACIONES)
-
-Cube (1) → (∞) Competitor → (∞) CompetitorRecord
-Tournament (1) → (∞) Competitor
-Tournament (1) → (∞) CompetitorRecord
-Cube (1) → (∞) CompetitorRecord
-
-INTERFAZ Y DISEÑO
-
-• Estilo glassmorphism
-• Sombras y efectos neon
-• Tarjetas de competidores
-• Tablas con bordes redondeados
-• Diseño responsive
-• Imágenes redondas con borde de brillo
-
-REQUIREMENTS 
-
+Requirements
 fastapi
 uvicorn
 sqlmodel
@@ -104,14 +145,5 @@ python-multipart
 cloudinary
 python-dotenv
 
-CONTRIBUIR
-
-Hacer fork
-
-Crear una rama
-
-Subir cambios
-
-Abrir Pull Request
 
 
