@@ -104,7 +104,7 @@ INTERFAZ Y DISEÑO
 • Diseño responsive
 • Imágenes redondas con borde de brillo
 
-REQUIREMENTS (POR SI HACE FALTA)
+REQUIREMENTS 
 
 fastapi
 uvicorn
@@ -124,9 +124,4 @@ Subir cambios
 
 Abrir Pull Request
 
-AUTOR
 
-Tu Nombre
-GitHub: https://github.com/tuusuario
-
-Email: tuemail@example.com
